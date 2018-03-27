@@ -68,10 +68,9 @@
             <div class="container" style="height:35%">
                 <div class="row">
                 <div class="col-2"></div>
-                <div class="col-2"><a href="#"><img src="{% static 'epsilon/assets/img/course/trig.png' %}" width="165" height="165" border="10"><p class="text-center">Trigonometery</p></a></div>
-                <div class="col-2"><a href="#"><img src="{% static 'epsilon/assets/img/course/alg.png' %}" width="165" height="165" border="10"><p class="text-center">Algebra</p></a></div>
-                <div class="col-2"><a href="#"><img src="{% static 'epsilon/assets/img/course/chem.png' %}" width="165" height="165" border="10"><p class="text-center">Chemistry</p></a></div>
-                <div class="col-2"><a href="#"><img src="{% static 'epsilon/assets/img/course/bio.png' %}" width="165" height="165" border="10"><p class="text-center">Biology</p></a></div>
+                {% for c in courses %}
+                <div class="col-2"><a href="/epsilon/course"><img src="{{ c.course_picture.url }}" width="165" height="165" border="10"><p class="text-center">{{ c.name }}</p></a></div>
+                {% endfor %}
                 <div class="col-2"></div>
             </div>
             </div>

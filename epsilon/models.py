@@ -24,6 +24,21 @@ class Constants:
         ('intermediate', 'intermediate'),
         ('advanced', 'advanced'),
     )
+    JOB_TYPE = (
+        ('Intern', 'Intern'),
+        ('Entry level (0-2 yrs)', 'Entry level (0-2 yrs)'),
+        ('Mid level (2+ yrs)', 'Mid level (2+ yrs)'),
+        ('Manager', 'Manager'),
+        ('Executive', 'Executive'),
+        ('Not Applicable', 'Not Applicable'),
+    )
+    EDUCATION_LEVEL = (
+        ('Below High School', 'Below High School'),
+        ('High School', 'High School'),
+        ('Bachelor Degree', 'Bachelor Degree'),
+        ('Master Degree', 'Master Degree'),
+        ('Doctrate Degree', 'Doctrate Degree'),
+    )
 
 
 class ExtraInfo(models.Model):
@@ -33,23 +48,37 @@ class ExtraInfo(models.Model):
     profile_picture = models.ImageField(null=True, blank=True)
     user_type = models.CharField(max_length=20, choices=Constants.USER_CHOICES,
                                  default='student')
-    job = models.CharField(max_length=40, null=True, blank=True)
-    qualification = models.CharField(max_length=40, null=True, blank=True)
+    job = models.CharField(max_length=20, choices=Constants.JOB_TYPE,
+                           null=True, blank=True)
+    qualification = models.CharField(max_length=40, choices=Constants.EDUCATION_LEVEL,
+                                     null=True, blank=True)
+
+    def __str__(self):
+        return '{}'.format(self.user)
 
 
 class Student(models.Model):
-    id = models.OneToOneField(ExtraInfo, on_delete=models.CASCADE, primary_key=True)
+    unique_id = models.OneToOneField(ExtraInfo, on_delete=models.CASCADE, primary_key=True)
     career_goal = models.CharField(max_length=40, null=True, blank=True)
+
+    def __str__(self):
+        return '{}'.format(self.unique_id.id)
 
 
 class Mentor(models.Model):
-    id = models.OneToOneField(ExtraInfo, on_delete=models.CASCADE, primary_key=True)
+    mentor_id = models.OneToOneField(ExtraInfo, on_delete=models.CASCADE, primary_key=True)
+
+    def __str__(self):
+        return '{}'.format(self.mentor_id.id)
 
 
 class Course(models.Model):
     name = models.CharField(max_length=40)
     description = models.TextField(default='', max_length=1000, blank=True, null=True)
     course_picture = models.ImageField(null=True, blank=True)
+
+    def __str__(self):
+        return '{}'.format(self.name)
 
 
 class Content(models.Model):
@@ -59,12 +88,18 @@ class Content(models.Model):
     level = models.CharField(max_length=20, choices=Constants.LEVEL, default='intermediate')
     content_picture = models.ImageField(null=True, blank=True)
 
+    def __str__(self):
+        return '{} - {}'.format(self.course_id.id, self.name)
+
 
 class Question(models.Model):
     content_id = models.ForeignKey(Content, on_delete=models.CASCADE)
     level = models.CharField(max_length=20, choices=Constants.LEVEL, default='intermediate')
     question = models.TextField(max_length=4000, null=True, blank=True)
     answer = models.CharField(max_length=100, null=True, blank=True)
+
+    def __str__(self):
+        return '{} - {}'.format(self.content_id.course_id.id, self.content_id)
 
 
 class Option(models.Model):
@@ -82,6 +117,7 @@ class Has(models.Model):
     career_id = models.ForeignKey(Career, on_delete=models.CASCADE)
     course_id = models.ForeignKey(Course, on_delete=models.CASCADE)
     level = models.CharField(max_length=20, choices=Constants.LEVEL, default='intermediate')
+    order = models.IntegerField(default=1)
 
 
 class Enroll(models.Model):

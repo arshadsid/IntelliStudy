@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+
+from .models import (Course, Enroll, Student, Mentor, Question, ExtraInfo)
 
 
 def auth(request):
@@ -32,8 +35,8 @@ def mentor(request):
 
 @login_required
 def dashboard(request):
-    user = request.user
-    context = {}
+    courses = Course.objects.all()
+    context = {'courses': courses}
     return render(request, "epsilon/student_dashboard.html", context)
 
 
@@ -51,7 +54,13 @@ def quiz(request):
 
 @login_required
 def mycourses(request):
-    context = {}
+    user = request.user
+    enroll = Enroll.objects.filter(Q(unique_id__in=Student.objects.filter(Q(unique_id__in=ExtraInfo.objects.filter(Q(user=user))))))
+    courses = []
+    for e in enroll:
+        course = Course.objects.filter(Q(id__in=e.course_id))
+        courses += course
+    context = {'courses': courses}
     return render(request, "epsilon/mycourses.html", context)
 
 

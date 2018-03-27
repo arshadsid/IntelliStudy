@@ -65,7 +65,7 @@
                                 <fieldset>
                                 <div class="row"><p></p></div>
                                   <div class="form-group">
-                                    <label for="exampleInputEmail1">Email address</label>
+                                    <label for="exampleInputEmail1">Username</label>
                                     <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Enter email">
 
                                   </div>
@@ -90,21 +90,60 @@
                                 <fieldset>
                                 <div class="row"><p></p></div>
                                     <div class="form-group">
-                                    <label class="col-form-label" for="inputDefault">Name</label>
-                                    <input type="text" class="form-control" placeholder="Enter your name" id="inputDefault">
+                                      <div class="form-group">
+                                      <label class="col-form-label" for="inputDefault">First Name</label>
+                                      <input type="text" class="form-control" name="fname" placeholder="Enter first name" id="inputDefault">
+                                      <label class="col-form-label" for="inputDefault1">Last Name</label>
+                                      <input type="text" class="form-control" name="lname" placeholder="Enter last name" id="inputDefault1">
+                                      </div>
+                                    <div class="form-group">
+                                    <label class="col-form-label" for="inputDefault">Username</label>
+                                    <input type="text" class="form-control" name="username" placeholder="Enter your username" id="inputDefault">
                                     </div>
                                   <div class="form-group">
                                     <label for="exampleInputEmail1">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Unique Email">
+                                    <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Your Email">
                                   </div>
                                   <div class="form-group">
                                     <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter Strong Password">
+                                    <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Enter Strong Password">
                                   </div>
                                   <div class="form-group">
                                     <label for="exampleInputPassword2">Confirm Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Re-enter Password">
-                                  </div>  <div class="row"><p></p></div>  <div class="row"><p></p></div>
+                                    <input type="password" class="form-control" name="password" id="exampleInputPassword2" placeholder="Re-enter Password">
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="exampleselect1">Gender</label>
+                                    <select class="custom-select" id="exampleselect1">
+                                        <option selected=""></option>
+                                        <option value="1">Male</option>
+                                        <option value="2">Female</option>
+                                        <option value="3">Other</option>
+                                    </select>
+                                    </div>
+                                    <div class="form-group">
+                                    <label for="exampledate1">Date of Birth</label>
+                                    <input type="date" class="form-control" placeholder="Enter DOB" id="exampledate1">
+                                    </div>
+                                    <div class="form-group">
+                                    <label for="exampleselect2">Job</label>
+                                    <select class="custom-select" id="exampleselect2">
+                                        <option selected=""></option>
+                                        <option value="1">Engg.</option>
+                                        <option value="2">Doctor</option>
+                                        <option value="3">Scientist</option>
+                                    </select>
+                                    </div>
+
+                                  <div class="form-group">
+                                    <label for="exampleselect3">Qualification</label>
+                                    <select class="custom-select" id="exampleselect3">
+                                        <option selected=""></option>
+                                        <option value="1">B.Tech.</option>
+                                        <option value="2">Shit Degree</option>
+                                        <option value="3">MS</option>
+                                    </select>
+                                  </div>
                                   <button type="submit" class="btn btn-primary">Submit</button>
                                 </fieldset>
                               </form>
