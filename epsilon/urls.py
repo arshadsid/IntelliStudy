@@ -14,4 +14,6 @@ urlpatterns = [
     url(r'^mycourses', views.mycourses, name='mycourses'),
     url(r'^study', views.study, name='study'),
     url(r'^group', views.group, name='group'),
+    url(r'^loggedout', views.loggedout, name='loggedout'),
+    url(r'^auth', views.auth, name='auth'),
     ]
