@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 
-from .models import (Course, Enroll, Student, Mentor, Question, ExtraInfo)
+from .models import (Course, Enroll, Student, Mentor, Question, ExtraInfo, Content, Manage)
 
 
 def auth(request):
@@ -42,7 +42,11 @@ def dashboard(request):
 
 @login_required
 def course(request):
-    context = {}
+    cid = request.POST.get('course')
+    course = Course.objects.get(Q(pk=cid))
+    content = Content.objects.filter(Q(course_id=course))
+    mentor = Mentor.objects.filter(Q(pk__in=Manage.objects.filter(Q(course_id=course)).values('mentor_id_id')))
+    context = {'course': course, 'content': content, 'mentor': mentor}
     return render(request, "epsilon/coursemain.html", context)
 
 
@@ -55,12 +59,8 @@ def quiz(request):
 @login_required
 def mycourses(request):
     user = request.user
-    enroll = Enroll.objects.filter(Q(unique_id__in=Student.objects.filter(Q(unique_id__in=ExtraInfo.objects.filter(Q(user=user))))))
-    courses = []
-    for e in enroll:
-        course = Course.objects.filter(Q(id__in=e.course_id))
-        courses += course
-    context = {'courses': courses}
+    course = Course.objects.filter(Q(pk__in=Enroll.objects.filter(Q(unique_id__in=Student.objects.filter(Q(unique_id__in=ExtraInfo.objects.filter(Q(user=user)))))).values('course_id_id')))
+    context = {'courses': course}
     return render(request, "epsilon/mycourses.html", context)
 
 
