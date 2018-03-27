@@ -37,97 +37,100 @@ class ExtraInfo(models.Model):
     qualification = models.CharField(max_length=40, null=True, blank=True)
 
 
-class Student:
+class Student(models.Model):
     id = models.OneToOneField(ExtraInfo, on_delete=models.CASCADE, primary_key=True)
     career_goal = models.CharField(max_length=40, null=True, blank=True)
 
 
-class Mentor:
+class Mentor(models.Model):
     id = models.OneToOneField(ExtraInfo, on_delete=models.CASCADE, primary_key=True)
 
 
-class Course:
+class Course(models.Model):
     name = models.CharField(max_length=40)
     description = models.TextField(default='', max_length=1000, blank=True, null=True)
+    course_picture = models.ImageField(null=True, blank=True)
 
 
-class Question:
+class Content(models.Model):
+    course_id = models.ForeignKey(Course, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    description = models.CharField(max_length=1000, null=True, blank=True)
+    level = models.CharField(max_length=20, choices=Constants.LEVEL, default='intermediate')
+    content_picture = models.ImageField(null=True, blank=True)
+
+
+class Question(models.Model):
     content_id = models.ForeignKey(Content, on_delete=models.CASCADE)
     level = models.CharField(max_length=20, choices=Constants.LEVEL, default='intermediate')
     question = models.TextField(max_length=4000, null=True, blank=True)
     answer = models.CharField(max_length=100, null=True, blank=True)
 
 
-class Option:
+class Option(models.Model):
     question_id = models.ForeignKey(Question, on_delete=models.CASCADE)
     option = models.CharField(max_length=100, null=True, blank=True)
 
 
-class Career:
+class Career(models.Model):
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=1000, null=True, blank=True)
+    career_picture = models.ImageField(null=True, blank=True)
 
 
-class Has:
+class Has(models.Model):
     career_id = models.ForeignKey(Career, on_delete=models.CASCADE)
     course_id = models.ForeignKey(Course, on_delete=models.CASCADE)
     level = models.CharField(max_length=20, choices=Constants.LEVEL, default='intermediate')
 
 
-class Enroll:
+class Enroll(models.Model):
     unique_id = models.ForeignKey(Student, on_delete=models.CASCADE)
     course_id = models.ForeignKey(Course, on_delete=models.CASCADE)
     feedback = models.TextField(default='', max_length=1000, blank=True, null=True)
 
 
-class Score:
+class Score(models.Model):
     content_id = models.ForeignKey(Content, on_delete=models.CASCADE)
     unique_id = models.ForeignKey(Student, on_delete=models.CASCADE)
     marks = models.IntegerField(default=0)
 
 
-class Group:
+class Group(models.Model):
     course_id = models.ForeignKey(Course, on_delete=models.CASCADE)
 
 
-class Contain:
+class Contain(models.Model):
     group_id = models.ForeignKey(Group, on_delete=models.CASCADE)
     unique_id = models.ForeignKey(Student, on_delete=models.CASCADE)
 
 
-class Manage:
+class Manage(models.Model):
     course_id = models.ForeignKey(Course, on_delete=models.CASCADE)
     mentor_id = models.ForeignKey(Mentor, on_delete=models.CASCADE)
 
 
-class Message:
+class Message(models.Model):
     message = models.TextField(default='', max_length=8000, blank=True, null=True)
     group_id = models.ForeignKey(Group, on_delete=models.CASCADE)
     unique_id = models.ForeignKey(Student, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now=True)
 
 
-class Peer:
+class Peer(models.Model):
     unique_id = models.ForeignKey(Student, on_delete=models.CASCADE)
     topic = models.CharField(max_length=100)
     question = models.TextField(max_length=4000, null=True, blank=True)
     answer = models.TextField(max_length=4000, null=True, blank=True)
 
 
-class Progress:
+class Progress(models.Model):
     enroll_id = models.ForeignKey(Enroll, on_delete=models.CASCADE)
     status = models.CharField(max_length=20, choices=Constants.CONTENT_TYPE, default='ONGOING')
 
 
-class Content:
-    course_id = models.ForeignKey(Course, on_delete=models.CASCADE)
-    name = models.CharField(max_length=100)
-    description = models.CharField(max_length=1000, null=True, blank=True)
-    level = models.CharField(max_length=20, choices=Constants.LEVEL, default='intermediate')
-
-
-class File:
+class File(models.Model):
     content_id = models.ForeignKey(Content, on_delete=models.CASCADE)
     mentor_id = models.ForeignKey(Mentor, on_delete=models.CASCADE)
-    file = FileField()
+    file = models.FileField()
     name = models.CharField(max_length=100)
