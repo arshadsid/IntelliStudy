@@ -1,18 +1,19 @@
+{% load static %}
     <html lang="en">
             <head>
               <title>Group</title>
               <meta charset="utf-8">
               <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-              <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
-              <script src="assets/js/bootstrap.min.js"></script>
-              <script src="assets/js/jquery-3.2.1.slim.min.js"></script>
+              <link rel="stylesheet" type="text/css" href="{% static 'epsilon/assets/css/bootstrap.css' %}">
+              <script src="{% static 'epsilon/assets/js/bootstrap.min.js' %}"></script>
+              <script src="{% static 'epsilon/assets/js/jquery-3.2.1.slim.min.js' %}"></script>
             </head>
             <body>
 
     <!--            NAV BAR-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-    <a class="navbar-brand" href="index.html"><img src="assets/img/index/mainname.png" height=45px /></a>
+    <a class="navbar-brand" href="/epsilon"><img src="{% static 'epsilon/assets/img/index/mainname.png' %}" height=45px /></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -20,12 +21,12 @@
     <div class="collapse navbar-collapse" id="navbarColor03">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="mycourses.html">My Courses <span class="sr-only" style="color:#3d3d3d">(current)</span></a>
+                <a class="nav-link" href="/epsilon/mycourses">My Courses <span class="sr-only" style="color:#3d3d3d">(current)</span></a>
             </li>
         </ul>
         <ul class="nav justify-content-end">
             <li class="nav-item">
-                <a class="nav-link" href="profile.html">Profile</a>
+                <a class="nav-link" href="/epsilon/profile">Profile</a>
             </li>
         </ul>
     </div>
@@ -33,13 +34,13 @@
 </nav>
 
             <div class="jumbotron" style="color: #2c2828;background: #d0e8f0">
-            <div class="row"><div class="col-lg-9"></div><div class="col-lg-2"><a href="coursestudy.html"><button type="button" class="btn btn-primary">Back to Course</button></a></div></div>
+            <div class="row"><div class="col-lg-9"></div><div class="col-lg-2"><a href="/epsilon/study"><button type="button" class="btn btn-primary">Back to Course</button></a></div></div>
             <h5 class="col-lg-1 offset-lg-2">Instructor</h5>
             <div class="row">
             <div class="col-lg-2"></div>
 <!--            Loop from here 8 time's-->
-            <div class="col-lg-1"><a href="#"><img src="assets/img/mentor.jpg" width="80" height="80" style="border-radius:1000px"><p class="text-left">Name Surname</p></a></div>
-            <div class="col-lg-1"><a href="#"><img src="assets/img/mentor.jpg" width="80" height="80" style="border-radius:1000px"><p class="text-left">Name Surname</p></a></div>
+            <div class="col-lg-1"><a href="#"><img src="{% static 'epsilon/assets/img/mentor.jpg' %}" width="80" height="80" style="border-radius:1000px"><p class="text-left">Name Surname</p></a></div>
+            <div class="col-lg-1"><a href="#"><img src="{% static 'epsilon/assets/img/mentor.jpg' %}" width="80" height="80" style="border-radius:1000px"><p class="text-left">Name Surname</p></a></div>
 <!--            loop till here-->
             <div class="col-lg-2"></div>
             </div>
@@ -48,14 +49,14 @@
             <div class="row">
             <div class="col-lg-2"></div>
 <!--            Loop from here max 8 times-->
-            <div class="col-lg-1"><a href="#"><img src="assets/img/group.jpg" width="80" height="80" style="border-radius:1000px"><p class="text-left">Name Surname</p></a></div>
-            <div class="col-lg-1"><a href="#"><img src="assets/img/group.jpg" width="80" height="80" style="border-radius:1000px"><p class="text-left">Name Surname</p></a></div>
-            <div class="col-lg-1"><a href="#"><img src="assets/img/group.jpg" width="80" height="80" style="border-radius:1000px"><p class="text-left">Name Surname</p></a></div>
-            <div class="col-lg-1"><a href="#"><img src="assets/img/group.jpg" width="80" height="80" style="border-radius:1000px"><p class="text-left">Name Surname</p></a></div>
-            <div class="col-lg-1"><a href="#"><img src="assets/img/group.jpg" width="80" height="80" style="border-radius:1000px"><p class="text-left">Name Surname</p></a></div>
-            <div class="col-lg-1"><a href="#"><img src="assets/img/group.jpg" width="80" height="80" style="border-radius:1000px"><p class="text-left">Name Surname</p></a></div>
-            <div class="col-lg-1"><a href="#"><img src="assets/img/group.jpg" width="80" height="80" style="border-radius:1000px"><p class="text-left">Name Surname</p></a></div>
-            <div class="col-lg-1"><a href="#"><img src="assets/img/group.jpg" width="80" height="80" style="border-radius:1000px"><p class="text-left">Name Surname</p></a></div>
+            <div class="col-lg-1"><a href="#"><img src="{% static 'epsilon/assets/img/group.jpg' %}" width="80" height="80" style="border-radius:1000px"><p class="text-left">Name Surname</p></a></div>
+            <div class="col-lg-1"><a href="#"><img src="{% static 'epsilon/assets/img/group.jpg' %}" width="80" height="80" style="border-radius:1000px"><p class="text-left">Name Surname</p></a></div>
+            <div class="col-lg-1"><a href="#"><img src="{% static 'epsilon/assets/img/group.jpg' %}" width="80" height="80" style="border-radius:1000px"><p class="text-left">Name Surname</p></a></div>
+            <div class="col-lg-1"><a href="#"><img src="{% static 'epsilon/assets/img/group.jpg' %}" width="80" height="80" style="border-radius:1000px"><p class="text-left">Name Surname</p></a></div>
+            <div class="col-lg-1"><a href="#"><img src="{% static 'epsilon/assets/img/group.jpg' %}" width="80" height="80" style="border-radius:1000px"><p class="text-left">Name Surname</p></a></div>
+            <div class="col-lg-1"><a href="#"><img src="{% static 'epsilon/assets/img/group.jpg' %}" width="80" height="80" style="border-radius:1000px"><p class="text-left">Name Surname</p></a></div>
+            <div class="col-lg-1"><a href="#"><img src="{% static 'epsilon/assets/img/group.jpg' %}" width="80" height="80" style="border-radius:1000px"><p class="text-left">Name Surname</p></a></div>
+            <div class="col-lg-1"><a href="#"><img src="{% static 'epsilon/assets/img/group.jpg' %}" width="80" height="80" style="border-radius:1000px"><p class="text-left">Name Surname</p></a></div>
 <!--            Loop till here-->
             </div>
             </div>
@@ -66,7 +67,7 @@
                 <div class="row" style="border: solid 1px #919aa1;padding: 10px;z-index:0;position: relative;width:90%;margin: -20px auto 0 auto;height:70%;overflow: scroll;background:#eaf9f8;">
 
                 <div class="col-lg-1">
-                    <img src="assets/img/group.jpg" width="40" height="40" style="border-radius:1000px">
+                    <img src="{% static 'epsilon/assets/img/group.jpg' %}" width="40" height="40" style="border-radius:1000px">
                 </div>
                 <div class="col-lg-11 fluid" style="background: white ">
                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
@@ -76,11 +77,11 @@
                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
                 </div>
                 <div class="col-lg-1">
-                    <img src="assets/img/group.jpg" width="40" height="40" style="border-radius:1000px">
+                    <img src="{% static 'epsilon/assets/img/group.jpg' %}" width="40" height="40" style="border-radius:1000px">
                 </div>
 
                 <div class="col-lg-1">
-                    <img src="assets/img/group.jpg" width="40" height="40" style="border-radius:1000px">
+                    <img src="{% static 'epsilon/assets/img/group.jpg' %}" width="40" height="40" style="border-radius:1000px">
                 </div>
                 <div class="col-lg-11 fluid" style="background: white ">
                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
@@ -90,11 +91,11 @@
                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
                 </div>
                 <div class="col-lg-1">
-                    <img src="assets/img/group.jpg" width="40" height="40" style="border-radius:1000px">
+                    <img src="{% static 'epsilon/assets/img/group.jpg' %}" width="40" height="40" style="border-radius:1000px">
                 </div>
 
                 <div class="col-lg-1">
-                    <img src="assets/img/group.jpg" width="40" height="40" style="border-radius:1000px">
+                    <img src="{% static 'epsilon/assets/img/group.jpg' %}" width="40" height="40" style="border-radius:1000px">
                 </div>
                 <div class="col-lg-11 fluid" style="background: white ">
                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
@@ -158,10 +159,10 @@
             <div class="col-lg-12"><hr style=" border: 2px solid #3d3d3d;">
             <ul class="list-unstyled">
               <li class="float-lg-right"><a href="#top">Back to top</a></li>
-              <li><a href="about.html">About</a></li>
+              <li><a href="/epsilon/about">About</a></li>
               <li><a href="https://github.com/gautamyadavs/IntelliStudy">Source | GitHub</a></li>
             </ul>
-            <center><p>Made with <img src="assets/img/index/heart.png" width=18px /> by <a href="about.html#members">Team Epsilon</a>.</p></center>
+            <center><p>Made with <img src="{% static 'epsilon/assets/img/index/heart.png' %}" width=18px /> by <a href="/epsilon/about">Team Epsilon</a>.</p></center>
             </div>
             </div>
 
