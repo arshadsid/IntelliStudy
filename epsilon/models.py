@@ -57,19 +57,28 @@ class ExtraInfo(models.Model):
         return '{}'.format(self.user)
 
 
-class Student(models.Model):
-    unique_id = models.OneToOneField(ExtraInfo, on_delete=models.CASCADE, primary_key=True)
-    career_goal = models.CharField(max_length=40, null=True, blank=True)
+class Career(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.CharField(max_length=1000, null=True, blank=True)
+    career_picture = models.ImageField(null=True, blank=True)
 
     def __str__(self):
-        return '{}'.format(self.unique_id.id)
+        return '{}'.format(self.name)
+
+
+class Student(models.Model):
+    unique_id = models.OneToOneField(ExtraInfo, on_delete=models.CASCADE, primary_key=True)
+    career_id = models.OneToOneField(Career, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return '{}'.format(self.unique_id)
 
 
 class Mentor(models.Model):
     mentor_id = models.OneToOneField(ExtraInfo, on_delete=models.CASCADE, primary_key=True)
 
     def __str__(self):
-        return '{}'.format(self.mentor_id.id)
+        return '{}'.format(self.mentor_id)
 
 
 class Course(models.Model):
@@ -105,12 +114,6 @@ class Question(models.Model):
 class Option(models.Model):
     question_id = models.ForeignKey(Question, on_delete=models.CASCADE)
     option = models.CharField(max_length=100, null=True, blank=True)
-
-
-class Career(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.CharField(max_length=1000, null=True, blank=True)
-    career_picture = models.ImageField(null=True, blank=True)
 
 
 class Has(models.Model):
