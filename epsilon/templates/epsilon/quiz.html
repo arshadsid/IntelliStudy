@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="{% static 'epsilon/assets/img/favicons/logo.png' %}">
 
-    <title>Course Name - Quiz 1</title>
+    <title>{{ content.name }} - Quiz</title>
 
     <!-- Bootstrap core CSS -->
     <script src="{% static 'epsilon/assets/js/jquery-3.2.1.slim.min.js' %}"></script>
@@ -43,8 +43,8 @@
       <div class="jumbotron" style="color: #2c2828;">
         <div class="row">
         <div class="col-lg-8 offset-lg-2">
-        <h1 class="display-3" style="color: #2c2828;">Course Name</h1><hr>
-        <p class="lead"><h3>Quiz 1</h3></p>
+        <h1 class="display-3" style="color: #2c2828;">{{ content.name }}</h1><hr>
+        <p class="lead"><h3>Quiz (Passing Marks - 8/10)</h3></p>
         </div>
       </div>
 
@@ -89,63 +89,6 @@
                                                 </fieldset>
                         <br>
 
-                              <fieldset class="form-group">
-                                                  <legend><h4>  Q) Why did the chicken die?  </h4></legend>
-                                                  <div class="form-check">
-                                                    <label class="form-check-label">
-                                                      <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-                                                     It got Stuck in its own trap.
-                                                    </label>
-                                                  </div><br>
-                                                  <div class="form-check">
-                                                  <label class="form-check-label">
-                                                      <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
-                                                      There was a conspiracy of dark-chicken army.
-                                                    </label>
-                                                  </div><br>
-                                                  <div class="form-check">
-                                                  <label class="form-check-label">
-                                                      <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option3">
-                                                      Committed Suicide.
-                                                    </label>
-                                                  </div><br>
-                                                  <div class="form-check">
-                                                  <label class="form-check-label">
-                                                      <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios4" value="option4">
-                                                      Arshad ate it.
-                                                    </label>
-                                                  </div><br>
-                                                </fieldset>
-                        <br>
-
-                              <fieldset class="form-group">
-                                                  <legend><h4>  Q) Why did the chicken die?  </h4></legend>
-                                                  <div class="form-check">
-                                                    <label class="form-check-label">
-                                                      <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-                                                     It got Stuck in its own trap.
-                                                    </label>
-                                                  </div><br>
-                                                  <div class="form-check">
-                                                  <label class="form-check-label">
-                                                      <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
-                                                      There was a conspiracy of dark-chicken army.
-                                                    </label>
-                                                  </div><br>
-                                                  <div class="form-check">
-                                                  <label class="form-check-label">
-                                                      <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option3">
-                                                      Committed Suicide.
-                                                    </label>
-                                                  </div><br>
-                                                  <div class="form-check">
-                                                  <label class="form-check-label">
-                                                      <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios4" value="option4">
-                                                      Arshad ate it.
-                                                    </label>
-                                                  </div><br>
-                                                </fieldset>
-                        <br>
 
                               <fieldset class="form-group">
 
@@ -154,35 +97,6 @@
 
                                                 </fieldset>
                         <br>
-
-
-                              <fieldset class="form-group">
-                                                  <legend><h4>  Q) Why did the chicken die?  </h4></legend>
-                                                  <div class="form-check">
-                                                    <label class="form-check-label">
-                                                      <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-                                                     It got Stuck in its own trap.
-                                                    </label>
-                                                  </div><br>
-                                                  <div class="form-check">
-                                                  <label class="form-check-label">
-                                                      <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
-                                                      There was a conspiracy of dark-chicken army.
-                                                    </label>
-                                                  </div><br>
-                                                  <div class="form-check">
-                                                  <label class="form-check-label">
-                                                      <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option3">
-                                                      Committed Suicide.
-                                                    </label>
-                                                  </div><br>
-                                                  <div class="form-check">
-                                                  <label class="form-check-label">
-                                                      <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios4" value="option4">
-                                                      Arshad ate it.
-                                                    </label>
-                                                  </div><br>
-                                              </fieldset>
 
                                                 <div class="row"><div class="offset-lg-7 col-lg-2"><center><button type="submit" class="btn btn-primary">Submit</button></center></div></div>
                         </form><br>

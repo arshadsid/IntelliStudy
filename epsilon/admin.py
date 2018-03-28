@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import (ExtraInfo, Student, Mentor, Course, Content, Question, Option, Career, Has,
-                    Enroll, Score, Group, Contain, Manage, Message, Peer, Progress, File)
+                    Enroll, Score, Group, Contain, Manage, Message, Peer, File)
 
 admin.site.register(ExtraInfo)
 admin.site.register(Student)
@@ -19,5 +19,4 @@ admin.site.register(Contain)
 admin.site.register(Manage)
 admin.site.register(Message)
 admin.site.register(Peer)
-admin.site.register(Progress)
 admin.site.register(File)

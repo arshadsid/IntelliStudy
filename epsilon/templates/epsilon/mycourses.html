@@ -65,7 +65,7 @@
           <div class="col-lg-10 offset-lg-1">
 
             {% for c in courses %}
-                  <a href="/epsilon/course"><div class="card bg-white text-white">
+                  <div class="card bg-white text-white">
                     <img class="card-img" src="{% static 'epsilon/assets/img/Card.jpg' %}" alt="Card image">
                     <div class="card-img-overlay">
                       <h5 class="card-title">{{ c.name }}</h5>
@@ -75,7 +75,7 @@
                     <div class="progress">
                       <div class="progress-bar bg-primary" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                  </div></a><p></p>
+                  </div><p></p>
               {% endfor %}
           </div>
         </div>

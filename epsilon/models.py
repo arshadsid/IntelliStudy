@@ -1,3 +1,5 @@
+import os
+
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -113,7 +115,10 @@ class Question(models.Model):
 
 class Option(models.Model):
     question_id = models.ForeignKey(Question, on_delete=models.CASCADE)
-    option = models.CharField(max_length=100, null=True, blank=True)
+    option_a = models.CharField(max_length=100, null=True, blank=True)
+    option_b = models.CharField(max_length=100, null=True, blank=True)
+    option_c = models.CharField(max_length=100, null=True, blank=True)
+    option_d = models.CharField(max_length=100, null=True, blank=True)
 
 
 class Has(models.Model):
@@ -132,7 +137,11 @@ class Enroll(models.Model):
 class Score(models.Model):
     content_id = models.ForeignKey(Content, on_delete=models.CASCADE)
     unique_id = models.ForeignKey(Student, on_delete=models.CASCADE)
-    marks = models.IntegerField(default=0)
+    marks = models.IntegerField(default=-1)
+    progress = models.CharField(max_length=20, choices=Constants.CONTENT_TYPE, default='ONGOING')
+
+    def __str__(self):
+        return '{} - {}'.format(self.unique_id, self.content_id)
 
 
 class Group(models.Model):
@@ -163,13 +172,19 @@ class Peer(models.Model):
     answer = models.TextField(max_length=4000, null=True, blank=True)
 
 
-class Progress(models.Model):
-    enroll_id = models.ForeignKey(Enroll, on_delete=models.CASCADE)
-    status = models.CharField(max_length=20, choices=Constants.CONTENT_TYPE, default='ONGOING')
-
-
 class File(models.Model):
     content_id = models.ForeignKey(Content, on_delete=models.CASCADE)
     mentor_id = models.ForeignKey(Mentor, on_delete=models.CASCADE)
     file = models.FileField()
     name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return '{} - {}'.format(self.name, self.content_id)
+
+    def extension(self):
+        name, extension = os.path.splitext(self.file.name)
+        if extension == 'pdf':
+            return 'pdf'
+        if extension == 'mp4':
+            return 'mp4'
+        return 'other'
