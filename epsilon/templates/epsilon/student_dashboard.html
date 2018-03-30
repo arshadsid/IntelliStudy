@@ -55,11 +55,19 @@
             <div class="container" style="height:35%">
                 <div class="row">
                 <div class="col-2"></div>
-                <div class="col-2"><a href="#"><img src="{% static 'epsilon/assets/img/path/ai.png' %}" width="165" height="165" border="10"><p class="text-center">AI</p></a></div>
-                <div class="col-2"><a href="#"><img src="{% static 'epsilon/assets/img/path/science.png' %}" width="165" height="165" border="10"><p class="text-center">Science</p></a></div>
+                {% for path in career %}
+                <form action=/epsilon/career method="post" class="ui form" role="form">
+                    {% csrf_token %}
+                    <button name="career" value="{{ path.pk }}" type="submit">
+                <div class="col-2">{% if path.career_picture %}{% else %}<img src="{% static 'epsilon/assets/img/index/heart.png' %}" width="165" height="165" border="10">{% endif %}<p class="text-center">{{path.name}}AI</p></a></div>
+                    </button>
+                <!-- <div class="col-2"><a href="#"><img src="{% static 'epsilon/assets/img/path/science.png' %}" width="165" height="165" border="10"><p class="text-center">Science</p></a></div>
                 <div class="col-2"><a href="#"><img src="{% static 'epsilon/assets/img/path/vr.png' %}" width="165" height="165" border="10"><p class="text-center">Virtual Reality</p></a></div>
-                <div class="col-2"><a href="#"><img src="{% static 'epsilon/assets/img/path/dscience.png' %}" width="165" height="165" border="10"><p class="text-center">Data Science</p></a></div>
+                <div class="col-2"><a href="#"><img src="{% static 'epsilon/assets/img/path/dscience.png' %}" width="165" height="165" border="10"><p class="text-center">Data Science</p></a></div> -->
+                </form>
+                {% endfor %}
                 <div class="col-2"></div>
+
             </div>
             </div>
 
@@ -72,7 +80,7 @@
                 <form action=/epsilon/course method="post" class="ui form" role="form">
                   {% csrf_token %}
                   <button name="course" value="{{ c.pk }}" type="submit">
-                <div class="col-2">{% if c.course_picture %}<img src="{{ c.course_picture.url }}" width="165" height="165" border="10">{% else %}<img src="{% static 'epsilon/assets/img/index/heart.png' %}" width="165" height="165" border="10">{% endif %}<p class="text-center">{{ c.name }}</p></div>
+                <div class="col-2">{% if c.course_picture %}<img src="{{ c.course_picture.url }}" width="165" height="165" border="10">{% else %}<img src="{% static 'epsilon/assets/img/index/default.jpeg' %}" width="165" height="165" border="10">{% endif %}<p class="text-center">{{ c.name }}</p></div>
               </button>
             </form>
                 {% endfor %}
@@ -90,7 +98,7 @@
               <li><a href="/epsilon/about">About</a></li>
               <li><a href="https://github.com/gautamyadavs/IntelliStudy">Source | GitHub</a></li>
             </ul>
-            <center><p>Made with <img src="{% static 'epsilon/assets/img/index/heart.png' %}" width=18px /> by <a href="/epsilon/about">Team Epsilon</a>.</p></center>
+            <center><p>Made with <img src="{% static 'epsilon/assets/img/index/default.jpeg' %}" width=18px /> by <a href="/epsilon/about">Team Epsilon</a>.</p></center>
             </div>
             </div>
         </body>

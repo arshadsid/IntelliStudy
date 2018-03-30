@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^mentor', views.mentor, name='mentor'),
     url(r'^student', views.student, name='student'),
     url(r'^course', views.course, name='course'),
+    url(r'^career', views.career, name='career'),
     url(r'^quiz', views.quiz, name='quiz'),
     url(r'^dashboard', views.dashboard, name='dashboard'),
     url(r'^profile', views.profile, name='profile'),

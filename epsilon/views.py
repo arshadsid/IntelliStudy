@@ -178,6 +178,18 @@ def course(request):
 
 
 @login_required
+def career(request):
+    user = request.user
+    if 'career' in request.POST:
+        career_id = request.POST.get('career')
+        career = Career.objects.get(Q(pk=career_id))
+        has = Has.objects.filter(Q(career_id=career))
+
+    context = {'career': career, 'has': has}
+    return render(request, "epsilon/careerpath.html", context)
+
+
+@login_required
 def quiz(request):
     if 'givequiz' in request.POST:
         cid = request.POST.get('givequiz')
