@@ -1,7 +1,7 @@
 {% load static %}
 <html lang="en">
         <head>
-          <title>InteliStudy</title>
+          <title>IntelliStudy</title>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
           <link rel="stylesheet" type="text/css" href="{% static 'epsilon/assets/css/bootstrap.css' %}">
@@ -81,7 +81,7 @@
                 <form action=/epsilon/course method="post" class="ui form" role="form">
                   {% csrf_token %}
                   <button name="course" value="{{ c.pk }}" type="submit">
-                <div class="col-2">{% if c.course_picture %}<img src="{{ c.course_picture.url }}" width="165" height="165" border="10">{% else %}<img src="{% static 'epsilon/assets/img/index/heart.png' %}" width="165" height="165" border="10">{% endif %}<p class="text-center">{{ c.name }}</p></div>
+                <div class="col-2">{% if c.course_picture %}<img src="{{ c.course_picture.url }}" width="165" height="165" border="10">{% else %}<img src="{% static 'epsilon/assets/img/index/default.png' %}" width="165" height="165" border="10">{% endif %}<p class="text-center">{{ c.name }}</p></div>
               </button>
             </form>
                 {% endfor %}
