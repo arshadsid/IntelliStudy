@@ -1,10 +1,13 @@
+import random
+
+
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 
 from .models import (Course, Enroll, Student, Mentor, Question, ExtraInfo, Content, Manage, Score,
-                     File, Option)
+                     File, Option, Contain, Group)
 
 
 def auth(request):
@@ -12,6 +15,24 @@ def auth(request):
     password = request.POST.get('password', '')
     print(username)
     user = authenticate(username = username, password = password)
+    extrainfo = ExtraInfo.objects.get(user=user)
+    if extrainfo.user_type == "student":
+        student = Student.objects.get(unique_id=extrainfo)
+        score = Score.objects.filter(unique_id=student)
+        counter = 0
+        flag = 0
+        for s in score:
+            if s.marks != -1:
+                counter = counter + 10
+                flag = flag + s.marks
+        if counter > 0:
+            avg = (flag * 100)/counter
+            if avg > 80:
+                student.level = "advanced"
+            elif avg > 60:
+                student.level = "intermediate"
+            else:
+                stduent.level = "beginner"
     if user is not None:
         login(request, user)
         return redirect('/epsilon/dashboard')
@@ -63,6 +84,10 @@ def course(request):
         enroll = Enroll.objects.filter(Q(unique_id=Student.objects.get(unique_id=ExtraInfo.objects.get(user=user)),
                                          course_id=course))
         content = Content.objects.filter(Q(course_id=course))
+        contain = Contain.objects.filter(Q(group_id=Group.objects.get(course_id=course),
+                                           unique_id=Student.objects.get(unique_id=ExtraInfo.objects.get(user=user))))
+        if contain.exists():
+            contain.delete()
         for c in content:
             score = Score.objects.filter(Q(content_id = c, unique_id=Student.objects.get(unique_id=ExtraInfo.objects.get(user=user))))
             score.delete()
@@ -83,9 +108,14 @@ def course(request):
         counter=counter+1
         if s.progress == "COMPLETED":
             flag=flag+1
-    progress = (flag * 100)/counter
+    if counter != 0:
+        progress = (flag * 100)/counter
+    else:
+        progress = 0
     mentor = Mentor.objects.filter(Q(pk__in=Manage.objects.filter(Q(course_id=course)).values('mentor_id_id')))
-    context = {'course': course, 'content': content, 'mentor': mentor, 'enroll': enroll, 'score': score, 'progress': progress}
+    contain = Contain.objects.filter(Q(group_id=Group.objects.get(course_id=course),
+                                       unique_id=Student.objects.get(unique_id=ExtraInfo.objects.get(user=user))))
+    context = {'course': course, 'content': content, 'mentor': mentor, 'enroll': enroll, 'score': score, 'progress': progress, 'contain': contain}
     return render(request, "epsilon/coursemain.html", context)
 
 
@@ -94,9 +124,12 @@ def quiz(request):
     if 'givequiz' in request.POST:
         cid = request.POST.get('givequiz')
         content = Content.objects.get(pk=cid)
-        quiz = Question.objects.filter(Q(content_id=content))
-        option = Option.objects.filter(Q(question_id__in=quiz))
-        context = {'content': content, 'quiz': quiz, 'option': option}
+        user=request.user()
+        unique_id=Student.objects.get(unique_id=ExtraInfo.objects.get(user=user))
+        quiz = Question.objects.filter(Q(content_id=content, level=unique_id.level))
+        questions = random.sample(list(quiz), 10)
+        option = Option.objects.filter(Q(question_id__in=questions))
+        context = {'content': content, 'questions': questions, 'option': option}
         return render(request, "epsilon/quiz.html", context)
 
 
@@ -119,14 +152,45 @@ def study(request):
     cid = request.POST.get('content')
     content = Content.objects.get(pk=cid)
     file = File.objects.filter(Q(content_id=content))
+    user=request.user()
+    unique_id=Student.objects.get(unique_id=ExtraInfo.objects.get(user=user))
+    quiz = Question.objects.filter(Q(content_id=content, level=unique_id.level))
     context = {'content': content, 'file': file}
     return render(request, "epsilon/coursestudy.html", context)
 
 
 @login_required
 def group(request):
-    context = {}
-    return render(request, "epsilon/coursegroup.html", context)
+    user = request.user
+    if 'group' in request.POST:
+        cid = request.POST.get('group')
+        course = Course.objects.get(pk=cid)
+        contain = Contain.objects.get(group_id__in=Group.objects.filter(Q(course_id=course)),
+                                      unique_id=Student.objects.get(unique_id=ExtraInfo.objects.get(user=user)))
+        students = Student.objects.filter(Q(unique_id__in=Contain.objects.filter(Q(group_id=Group.objects.filter(Q(course_id=course)))).values('unique_id_id')))
+        context = {'course': course, 'students': students}
+        return render(request, "epsilon/coursegroup.html", context)
+    if 'join' in request.POST:
+        cid = request.POST.get('join')
+        course = Course.objects.get(pk=cid)
+        flag = 0
+        student = Student.objects.get(unique_id=ExtraInfo.objects.get(user=user))
+        group=Group.objects.filter(Q(course_id=course, level=student.level))
+        for g in group:
+            contain = Contain.objects.filter(Q(group_id=g))
+            counter = 0
+            for c in contain:
+                counter = counter + 1
+            if counter<5:
+                contain = Contain.objects.create(group_id=g, unique_id=student)
+                contain.save()
+                flag = 1
+                break
+        if flag == 0:
+            group = Group.objects.create(course_id=course, level=student.level)
+            group.save()
+            contain = Contain.objects.create(group_id=group, unique_id=student)
+            contain.save()
 
 
 def about(request):

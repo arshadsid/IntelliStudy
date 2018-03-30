@@ -71,6 +71,7 @@ class Career(models.Model):
 class Student(models.Model):
     unique_id = models.OneToOneField(ExtraInfo, on_delete=models.CASCADE, primary_key=True)
     career_id = models.OneToOneField(Career, on_delete=models.CASCADE)
+    level = models.CharField(max_length=20, choices=Constants.LEVEL, default='beginner')
 
     def __str__(self):
         return '{}'.format(self.unique_id)
@@ -146,6 +147,7 @@ class Score(models.Model):
 
 class Group(models.Model):
     course_id = models.ForeignKey(Course, on_delete=models.CASCADE)
+    level = models.CharField(max_length=20, choices=Constants.LEVEL, default='intermediate')
 
 
 class Contain(models.Model):
@@ -183,8 +185,8 @@ class File(models.Model):
 
     def extension(self):
         name, extension = os.path.splitext(self.file.name)
-        if extension == 'pdf':
+        if extension == '.pdf':
             return 'pdf'
-        if extension == 'mp4':
+        if extension == '.mp4':
             return 'mp4'
         return 'other'
