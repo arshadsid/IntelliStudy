@@ -14,7 +14,6 @@ from .models import (Course, Enroll, Student, Mentor, Question, ExtraInfo, Conte
 def auth(request):
     username = request.POST.get('username', '')
     password = request.POST.get('password', '')
-    print(username)
     user = authenticate(username = username, password = password)
     extrainfo = ExtraInfo.objects.get(user=user)
     if extrainfo.user_type == "student":
@@ -36,7 +35,10 @@ def auth(request):
                 stduent.level = "beginner"
     if user is not None:
         login(request, user)
-        return redirect('/epsilon/dashboard')
+        if extrainfo.user_type == "student":
+            return redirect('/epsilon/dashboard')
+        else:
+            return redirect('/epsilon/mdashboard')
     else:
         return redirect('/epsilon')
 
@@ -109,8 +111,6 @@ def mentor(request):
 
 @login_required
 def dashboard(request):
-
-
     courses = Course.objects.all()
     context = {'courses': courses}
     return render(request, "epsilon/student_dashboard.html", context)
@@ -204,11 +204,6 @@ def profile(request):
     user = request.user
     extrainfo = ExtraInfo.objects.get(user=user)
     context = {'extrainfo': extrainfo, 'user':user}
-    print(extrainfo.job,extrainfo.qualification)
-
-    # if user.password is not None:
-    #     user.set_password(password)
-    #     user.save()
     return render(request, "epsilon/profile.html", context)
 
 @login_required
@@ -222,7 +217,7 @@ def update_profile(request):
     extrainfo.qualification = qualification
     extrainfo.save()
     user.set_password(password)
-    user.save() 
+    user.save()
     context = {'extrainfo': extrainfo, 'user':user}
 
     profile(request)
@@ -276,6 +271,42 @@ def group(request):
 
 def about(request):
     return render(request, 'epsilon/about.html')
+
+
+@login_required
+def mdashboard(request):
+    courses = Course.objects.all()
+    context = {'courses': courses}
+    return render(request, "epsilon/mentor_dashboard.html", context)
+
+
+@login_required
+def manage(request):
+    user = request.user
+    courses = Course.objects.filter(Q(pk__in=Manage.objects.filter(Q(mentor_id__in=Mentor.objects.filter(Q(mentor_id__in=ExtraInfo.objects.filter(Q(user=user)))))).values('course_id_id')))
+    context = {'courses': courses}
+    return render(request, "epsilon/managecourses.html", context)
+
+
+@login_required
+def edittopic(request):
+    courses = Course.objects.all()
+    context = {'courses': courses}
+    return render(request, "epsilon/editsubtopic.html", context)
+
+
+@login_required
+def editquiz(request):
+    courses = Course.objects.all()
+    context = {'courses': courses}
+    return render(request, "epsilon/editquiz.html", context)
+
+
+@login_required
+def editcourse(request):
+    courses = Course.objects.all()
+    context = {'courses': courses}
+    return render(request, "epsilon/editcourse.html", context)
 
 
 @login_required
