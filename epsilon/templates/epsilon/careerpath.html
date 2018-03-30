@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="{% static 'epsilon/assets/img/favicons/logo.png' %}">
 
-    <title>Career : {{career.name}}</title>
+    <title>Career</title>
 
     <!-- Bootstrap core CSS -->
     <script src="{% static 'epsilon/assets/js/jquery-3.2.1.slim.min.js' %}"></script>
@@ -31,7 +31,7 @@
         bottom: 0;
         position: absolute;
         content: " ";
-        width: 3px;
+        width: 3px;S
         background-color: #eeeeee;
         left: 50%;
         margin-left: -1.5px;
@@ -233,10 +233,10 @@
       <div class="jumbotron" style="color: #2c2828;background: #d0e8f0;">
         <div class="row">
         <div class="col-lg-7 offset-lg-1">
-        <h1 class="display-3" style="color: #2c2828;">Career Path Name</h1>
-        <p class="lead">Career Path Description.</p>
+        <h1 class="display-3" style="color: #2c2828;">{{career.name}}</h1>
+        <p class="lead">{{career.description}}</p>
         <hr class="my-4">
-{% static 'epsilon/
+
         <div class="row"><p><br></p></div>
           <p><h5>Learning Path Progress</h5></p>
         <div class="progress">
@@ -284,23 +284,25 @@
                                             </div>
 
                                             <ul class="timeline">
+                                            {% for h in has %}
 
-                                                <li>
-                                                  <div class="timeline-badge info"><i class="glyphicon glyphicon-check">1</i></div>
+                                                <!-- <li class="{% cycle 'normal' 'timeline-inverted' %}">{{ field }}</li> -->
+                                                  <li>
+                                                  <div class="timeline-badge info"><i class="glyphicon glyphicon-check">{{forloop.counter}}</i></div>
                                                   <div class="timeline-panel">
                                                     <div class="timeline-heading">
-                                                      <h4 class="timeline-title">Course Name</h4>
-                                                      <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i><span class="badge badge-info">Beginner</span></small></p>
+                                                      <h4 class="timeline-title">{{h.course_id}}</h4>
+                                                      <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>{% if h.level == 'beginner' %}<span class="badge badge-info">{% elif h.level == 'intermediate' %}<span class="badge badge-warning">{% else %}<span class="badge badge-danger">{% endif %} {{h.level}}</span></small></p>
                                                     </div>
                                                     <div class="timeline-body">
-                                                      <p>Course Description</p>
+                                                      <p>{{h.course_id.description}}</p>
                                                       <hr>
-                                                      <a href="coursemain.html"><button type="button" class="btn btn-primary btn-sm">Goto Course</button></a>
+                                                      <a href="coursemain.html"><button type="button" class="btn btn-primary btn-sm">Go to Course</button></a>
                                                     </div>
                                                   </div>
                                                 </li>
-
-                                                <li class="timeline-inverted">
+                                            {% endfor %}
+                                                <!-- <li class="timeline-inverted">
                                                   <div class="timeline-badge warning"><i class="glyphicon glyphicon-credit-card">2</i></div>
                                                   <div class="timeline-panel">
                                                     <div class="timeline-heading">
@@ -313,9 +315,9 @@
                                                       <a href="coursemain.html"><button type="button" class="btn btn-primary btn-sm">Goto Course</button></a>
                                                     </div>
                                                   </div>
-                                                </li>
+                                                </li> -->
 
-                                                <li>
+<!--                                                 <li>
                                                   <div class="timeline-badge warning"><i class="glyphicon glyphicon-credit-card">3</i></div>
                                                   <div class="timeline-panel">
                                                     <div class="timeline-heading">
@@ -373,7 +375,7 @@
                                                       <a href="coursemain.html"><button type="button" class="btn btn-primary btn-sm">Goto Course</button></a>
                                                      </div>
                                                     </div>
-                                                </li>
+                                                </li> -->
 
                                             </ul>
                         </div>

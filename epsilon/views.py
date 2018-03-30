@@ -8,7 +8,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.db.models import Q
 from .models import (Course, Enroll, Student, Mentor, Question, ExtraInfo, Content, Manage, Score,
-                     File, Option, Contain, Group)
+                     File, Option, Contain, Group, Career, Has)
 
 
 def auth(request):
@@ -38,7 +38,7 @@ def auth(request):
         if extrainfo.user_type == "student":
             return redirect('/epsilon/dashboard')
         else:
-            return redirect('/epsilon/mdashboard')
+            return rediect('/epsilon/mdashboard')
     else:
         return redirect('/epsilon')
 
@@ -112,7 +112,8 @@ def mentor(request):
 @login_required
 def dashboard(request):
     courses = Course.objects.all()
-    context = {'courses': courses}
+    career = Career.objects.all()
+    context = {'courses': courses, 'career': career}
     return render(request, "epsilon/student_dashboard.html", context)
 
 
@@ -183,8 +184,8 @@ def career(request):
     if 'career' in request.POST:
         career_id = request.POST.get('career')
         career = Career.objects.get(Q(pk=career_id))
-        has = Has.objects.filter(Q(career_id=career))
-
+        has = sorted(Has.objects.filter(Q(career_id=career)), key=lambda t: t.order)
+        print(has)
     context = {'career': career, 'has': has}
     return render(request, "epsilon/careerpath.html", context)
 
@@ -288,7 +289,8 @@ def about(request):
 @login_required
 def mdashboard(request):
     courses = Course.objects.all()
-    context = {'courses': courses}
+    career = Career.objects.all()
+    context = {'courses': courses, 'career': career}
     return render(request, "epsilon/mentor_dashboard.html", context)
 
 
