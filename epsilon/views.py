@@ -167,8 +167,12 @@ def course(request):
     else:
         progress = 0
     mentor = Mentor.objects.filter(Q(pk__in=Manage.objects.filter(Q(course_id=course)).values('mentor_id_id')))
-    contain = Contain.objects.filter(Q(group_id=Group.objects.get(course_id=course),
-                                       unique_id=Student.objects.get(unique_id=ExtraInfo.objects.get(user=user))))
+    group = Group.objects.filter(Q(course_id=course))
+    if group:
+        contain = Contain.objects.filter(Q(group_id=Group.objects.get(course_id=course),
+                                           unique_id=Student.objects.get(unique_id=ExtraInfo.objects.get(user=user))))
+    else:
+        contain = []
     context = {'course': course, 'content': content, 'mentor': mentor, 'enroll': enroll, 'score': score, 'progress': progress, 'contain': contain}
     return render(request, "epsilon/coursemain.html", context)
 
