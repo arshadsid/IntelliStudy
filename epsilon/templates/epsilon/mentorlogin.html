@@ -60,17 +60,18 @@
 
                             <div>
 
-                              <form action="/epsilon/dashboard">
+                              <form action="/epsilon/auth" method="POST">
+                                {% csrf_token %}
                                 <fieldset>
                                 <div class="row"><p></p></div>
                                   <div class="form-group">
                                     <label for="exampleInputEmail1">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                    <input type="text" class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
 
                                   </div>
                                   <div class="form-group">
                                     <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                    <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password">
 
                                   </div>  <div class="row"><p></p></div>  <div class="row"><p></p></div>
                                   <button type="submit" class="btn btn-primary ">Submit</button>
@@ -140,7 +141,7 @@
 
                                   <div class="form-group">
                                     <label for="exampleselect3">Qualification</label>
-                                    <select class="custom-select" name="qualification" 
+                                    <select class="custom-select" name="qualification"
 
                                     id="exampleselect3">
                                         <option selected=""></option>

@@ -18,5 +18,10 @@ urlpatterns = [
     url(r'^group', views.group, name='group'),
     url(r'^loggedout', views.loggedout, name='loggedout'),
     url(r'^auth', views.auth, name='auth'),
-    url(r'^signup', views.signup, name='signup')
+    url(r'^signup', views.signup, name='signup'),
+    url(r'^mdashboard', views.mdashboard, name='mdashboard'),
+    url(r'^manage', views.manage, name='manage'),
+    url(r'^edittopic', views.edittopic, name='edittopic'),
+    url(r'^editquiz', views.editquiz, name='editquiz'),
+    url(r'^editcourse', views.editcourse, name='editcourse'),
     ]
