@@ -34,30 +34,15 @@
 </nav>
 
             <div class="jumbotron" style="color: #2c2828;background: #d0e8f0">
-            <div class="row"><div class="col-lg-9"></div><div class="col-lg-2"><a href="/epsilon/study"><button type="button" class="btn btn-primary">Back to Course</button></a></div></div>
-            <h5 class="col-lg-1 offset-lg-2">Instructor</h5>
-            <div class="row">
-            <div class="col-lg-2"></div>
-<!--            Loop from here 8 time's-->
-            <div class="col-lg-1"><a href="#"><img src="{% static 'epsilon/assets/img/mentor.jpg' %}" width="80" height="80" style="border-radius:1000px"><p class="text-left">Name Surname</p></a></div>
-            <div class="col-lg-1"><a href="#"><img src="{% static 'epsilon/assets/img/mentor.jpg' %}" width="80" height="80" style="border-radius:1000px"><p class="text-left">Name Surname</p></a></div>
-<!--            loop till here-->
-            <div class="col-lg-2"></div>
-            </div>
-            <div class="container"><hr></div>
+            <div class="row"><div class="col-lg-9"></div><div class="col-lg-2">
+              <form action=/epsilon/course method="post" class="ui form" role="form">
+                {% csrf_token %}<button name="course" value="{{ course.pk }}" type="submit" class="btn btn-primary">Back to Course</button></form></div></div>
             <h5 class="col-lg-1 offset-lg-2">Student</h5>
             <div class="row">
             <div class="col-lg-2"></div>
-<!--            Loop from here max 8 times-->
-            <div class="col-lg-1"><a href="#"><img src="{% static 'epsilon/assets/img/group.jpg' %}" width="80" height="80" style="border-radius:1000px"><p class="text-left">Name Surname</p></a></div>
-            <div class="col-lg-1"><a href="#"><img src="{% static 'epsilon/assets/img/group.jpg' %}" width="80" height="80" style="border-radius:1000px"><p class="text-left">Name Surname</p></a></div>
-            <div class="col-lg-1"><a href="#"><img src="{% static 'epsilon/assets/img/group.jpg' %}" width="80" height="80" style="border-radius:1000px"><p class="text-left">Name Surname</p></a></div>
-            <div class="col-lg-1"><a href="#"><img src="{% static 'epsilon/assets/img/group.jpg' %}" width="80" height="80" style="border-radius:1000px"><p class="text-left">Name Surname</p></a></div>
-            <div class="col-lg-1"><a href="#"><img src="{% static 'epsilon/assets/img/group.jpg' %}" width="80" height="80" style="border-radius:1000px"><p class="text-left">Name Surname</p></a></div>
-            <div class="col-lg-1"><a href="#"><img src="{% static 'epsilon/assets/img/group.jpg' %}" width="80" height="80" style="border-radius:1000px"><p class="text-left">Name Surname</p></a></div>
-            <div class="col-lg-1"><a href="#"><img src="{% static 'epsilon/assets/img/group.jpg' %}" width="80" height="80" style="border-radius:1000px"><p class="text-left">Name Surname</p></a></div>
-            <div class="col-lg-1"><a href="#"><img src="{% static 'epsilon/assets/img/group.jpg' %}" width="80" height="80" style="border-radius:1000px"><p class="text-left">Name Surname</p></a></div>
-<!--            Loop till here-->
+            {% for s in students %}
+            <div class="col-lg-1"><a href="#"><img src="{{ s.unique_id.profile_picture.url }}" width="80" height="80" style="border-radius:1000px"><p class="text-left">{{ s.unique_id.user.first_name }} {{ s.unique_id.user.last_name }}</p></a></div>
+            {% endfor %}
             </div>
             </div>
             <div class="container" style="height:10%"></div>

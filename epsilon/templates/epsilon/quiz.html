@@ -60,34 +60,39 @@
 
                       <div class="col-lg-8">
                         <form>
+                          {% for q in question_id %}
+                          {% for o in option %}
+                          {% if o.question_id == q %}
                               <fieldset class="form-group">
-                                                  <legend><h4>  Q) Why did the chicken die?  </h4></legend>
+                                                  <legend><h4>  {{ q.question }}  </h4></legend>
                                                   <div class="form-check">
                                                     <label class="form-check-label">
                                                       <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-                                                     It got Stuck in its own trap.
+                                                     {{ o.option_a }}
                                                     </label>
                                                   </div><br>
                                                   <div class="form-check">
                                                   <label class="form-check-label">
                                                       <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
-                                                      There was a conspiracy of dark-chicken army.
+                                                      {{ o.option_b }}
                                                     </label>
                                                   </div><br>
                                                   <div class="form-check">
                                                   <label class="form-check-label">
                                                       <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option3">
-                                                      Committed Suicide.
+                                                      {{ o.option_c }}
                                                     </label>
                                                   </div><br>
                                                   <div class="form-check">
                                                   <label class="form-check-label">
                                                       <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios4" value="option4">
-                                                      Arshad ate it.
+                                                      {{ o.option_d }}
                                                     </label>
                                                   </div><br>
                                                 </fieldset>
                         <br>
+                        {% endif %}
+                        {% endfor %}
 
 
                               <fieldset class="form-group">
@@ -99,6 +104,7 @@
                         <br>
 
                                                 <div class="row"><div class="offset-lg-7 col-lg-2"><center><button type="submit" class="btn btn-primary">Submit</button></center></div></div>
+                                                {% endfor %}
                         </form><br>
                       </div>
 
