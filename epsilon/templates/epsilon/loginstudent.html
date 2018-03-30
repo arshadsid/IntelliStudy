@@ -60,7 +60,7 @@
 
                             <div>
 
-                              <form action="/epsilon/auth" method="post">
+                              <form action="/epsilon/auth" method="POST">
                                 {% csrf_token %}
                                 <fieldset>
                                 <div class="row"><p></p></div>
@@ -85,7 +85,7 @@
 
                             <div>
 
-                              <form action="/epsilon/dashboard" method="post">
+                              <form action="/epsilon/signup" method="POST">
                                 {% csrf_token %}
                                 <fieldset>
                                 <div class="row"><p></p></div>
@@ -114,34 +114,42 @@
                                   </div>
                                   <div class="form-group">
                                     <label for="exampleselect1">Gender</label>
-                                    <select class="custom-select" id="exampleselect1">
+                                    <select class="custom-select" name="gender" id="exampleselect1">
                                         <option selected=""></option>
-                                        <option value="1">Male</option>
-                                        <option value="2">Female</option>
-                                        <option value="3">Other</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
                                     </select>
                                     </div>
                                     <div class="form-group">
                                     <label for="exampledate1">Date of Birth</label>
-                                    <input type="date" class="form-control" placeholder="Enter DOB" id="exampledate1">
+                                    <input type="date" class="form-control" placeholder="Enter DOB" name="dob"
+                                    id="exampledate1">
                                     </div>
                                     <div class="form-group">
                                     <label for="exampleselect2">Job</label>
-                                    <select class="custom-select" id="exampleselect2">
+                                    <select class="custom-select" name="job" id="exampleselect2">
                                         <option selected=""></option>
-                                        <option value="1">Engg.</option>
-                                        <option value="2">Doctor</option>
-                                        <option value="3">Scientist</option>
+                                        <option value="Intern">Intern</option>
+                                        <option value="Entry level (0-2 yrs)">Entry level (0-2 yrs)</option>
+                                        <option value="Mid level (2+ yrs)">Mid level (2+ yrs)</option>
+                                        <option value="Manager">Manager</option>
+                                        <option value="Executive">Executive</option>
+                                        <option value="Not Applicable">Not Applicable</option>
                                     </select>
                                     </div>
 
                                   <div class="form-group">
                                     <label for="exampleselect3">Qualification</label>
-                                    <select class="custom-select" id="exampleselect3">
+                                    <select class="custom-select" name="qualification" 
+
+                                    id="exampleselect3">
                                         <option selected=""></option>
-                                        <option value="1">B.Tech.</option>
-                                        <option value="2">Shit Degree</option>
-                                        <option value="3">MS</option>
+                                        <option value="Below High School">Below High School</option>
+                                        <option value="High School">High School</option>
+                                        <option value="Bachelor Degree">Bachelor Degree</option>
+                                        <option value="Master Degree">Master Degree</option>
+                                        <option value="Doctrate Degree">Doctrate Degree</option>
                                     </select>
                                   </div>
                                   <button type="submit" class="btn btn-primary">Submit</button>

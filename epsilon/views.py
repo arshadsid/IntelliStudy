@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
+from django.contrib.auth.models import User
 from django.db.models import Q
-
+from passlib.hash import pbkdf2_sha256
 from .models import (Course, Enroll, Student, Mentor, Question, ExtraInfo, Content, Manage, Score,
                      File, Option)
 
@@ -18,6 +20,31 @@ def auth(request):
     else:
         return redirect('/epsilon')
 
+def signup(request):
+    fname = request.POST.get("fname")
+    lname = request.POST.get("lname")
+    username = request.POST.get("username")
+    email = request.POST.get("email")
+    password = request.POST.get("password")
+    print(password)
+    user, created = User.objects.get_or_create(username = username)
+    if created:
+        user.set_password(password)
+        user.first_name = fname
+        user.last_name = lname
+        user.email = email
+        user.save()
+    gender = request.POST.get("gender")
+    job = request.POST.get("job")
+    qualification = request.POST.get("qualification")
+    dob = request.POST.get("dob")
+    print(job,qualification)
+    info = ExtraInfo(user=user , sex=gender, date_of_birth=dob, job=job, qualification=qualification)
+    info.save()
+    login(request, user)
+    return redirect('/epsilon/dashboard')
+
+    # return HttpResponse("successfully signed up")
 
 def index(request):
     context = {}
@@ -36,6 +63,8 @@ def mentor(request):
 
 @login_required
 def dashboard(request):
+    
+
     courses = Course.objects.all()
     context = {'courses': courses}
     return render(request, "epsilon/student_dashboard.html", context)
@@ -83,7 +112,10 @@ def course(request):
         counter=counter+1
         if s.progress == "COMPLETED":
             flag=flag+1
-    progress = (flag * 100)/counter
+    if counter != 0:
+        progress = (flag * 100)/counter
+    else:
+        progress = 0
     mentor = Mentor.objects.filter(Q(pk__in=Manage.objects.filter(Q(course_id=course)).values('mentor_id_id')))
     context = {'course': course, 'content': content, 'mentor': mentor, 'enroll': enroll, 'score': score, 'progress': progress}
     return render(request, "epsilon/coursemain.html", context)
@@ -110,10 +142,32 @@ def mycourses(request):
 
 @login_required
 def profile(request):
-    context = {}
+    user = request.user
+    extrainfo = ExtraInfo.objects.get(user=user)
+    context = {'extrainfo': extrainfo, 'user':user}
+    print(extrainfo.job,extrainfo.qualification)
+
+    # if user.password is not None:
+    #     user.set_password(password)
+    #     user.save()
     return render(request, "epsilon/profile.html", context)
 
+@login_required
+def update_profile(request):
+    user = request.user
+    extrainfo = ExtraInfo.objects.get(user=user)
+    job = request.POST.get("job_opt")
+    qualification = request.POST.get("qualify_opt")
+    password = request.POST.get("password")
+    extrainfo.job = job
+    extrainfo.qualification = qualification
+    extrainfo.save()
+    
+    context = {'extrainfo': extrainfo, 'user':user}
 
+    profile(request)
+    return render(request, "epsilon/profile.html", context)
+    
 @login_required
 def study(request):
     cid = request.POST.get('content')

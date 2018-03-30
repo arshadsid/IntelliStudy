@@ -45,38 +45,44 @@
           <div class="col-lg-6 offset-lg-1">
 
 
-            <form>
+            <form method="POST" action="/epsilon/update_profile">
+              {% csrf_token %}
               <fieldset>
                 <div class="form-group">
                   <label class="col-form-label" for="inputDefault"><h4 style="color: #ffffff">Change your Username</h4></label>
-                  <input style="background: #d0e8f0; font-size: 30px ;border: 5px solid white" type="text" class="form-control" placeholder="Arpit Jain" id="inputDefault">
+                  <input style="background: #d0e8f0; font-size: 30px ;border: 5px solid white" type="text" class="form-control" placeholder={{user.username}} id="inputDefault">
                 </div>
 
                 <div class="form-group">
                 <label for="exampleselect2"><h4 style="color: #ffffff">Job</h4></label>
-                <select style="background: #d0e8f0; border: 5px solid white" class="custom-select" id="exampleselect2">
-                    <option selected=""></option>
-                    <option value="1">Engg.</option>
-                    <option value="2">Doctor</option>
-                    <option value="3">Scientist</option>
+                <select style="background: #d0e8f0; border: 5px solid white" class="custom-select" id="exampleselect2" name="job_opt">
+                    <option selected="{{extrainfo.job}}">{{extrainfo.job}}</option>
+                    <option value="Intern">Intern</option>
+                    <option value="Entry level (0-2 yrs)">Entry level (0-2 yrs)</option>
+                    <option value="Mid level (2+ yrs)">Mid level (2+ yrs)</option>
+                    <option value="Manager">Manager</option>
+                    <option value="Executive">Executive</option>
+                    <option value="Not Applicable">Not Applicable</option>
                 </select>
                 </div>
 
               <div class="form-group">
                 <label for="exampleselect3"><h4 style="color: #ffffff">Qualification</h4></label>
-                <select style="background: #d0e8f0; border: 5px solid white" class="custom-select" id="exampleselect3">
-                    <option selected=""></option>
-                    <option value="1">B.Tech.</option>
-                    <option value="2">Shit Degree</option>
-                    <option value="3">MS</option>
+                <select style="background: #d0e8f0 ; border: 5px solid white" class="custom-select" id="exampleselect3" name="qualify_opt">
+                    <option selected="{{extrainfo.qualification}}">{{extrainfo.qualification}}</option>
+                    <option value="Below High School">Below High School</option>
+                    <option value="High School">High School</option>
+                    <option value="Bachelor Degree">Bachelor Degree</option>
+                    <option value="Master Degree">Master Degree</option>
+                    <option value="Doctrate Degree">Doctrate Degree</option>
                 </select>
               </div>
 
                 <div class="form-group">
                   <label for="exampleInputPassword1"><h4 style="color: #ffffff">Password</h4></label>
-                  <input style="color:white; background: #d0e8f0;border: 5px solid white" type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter New Password">
+                  <input style="color:white; background: #d0e8f0;border: 5px solid white" type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter New Password" name="password">
                     <br>
-                  <input style="color:white; background: #d0e8f0;border: 5px solid white" type="password" class="form-control" id="exampleInputPassword2" placeholder="Re-enter New Password">
+                  <input style="color:white; background: #d0e8f0;border: 5px solid white" type="password" class="form-control" id="exampleInputPassword2" placeholder="Re-enter New Password" name="confirm_pass">
                 </div>
 
                 <button type="submit" class="btn btn-secondary">Submit</button>
@@ -88,7 +94,7 @@
 
           <div class="col-lg-3 offset-lg-1">
               <img class="card-img-top" style="border-radius:600px ;width:300px; padding top:20px" src="{% static 'epsilon/assets/img/members/arpit.jpg' %}" alt="Card image cap">
-              <div class="row"><div class="offset-lg-3"><p><br><h2><center style="color:white">Arpit Jain</center></h2></p></div></div>
+              <div class="row"><div class="offset-lg-3"><p><br><h2><center style="color:white">{{user.first_name}} {{user.last_name}}</center></h2></p></div></div>
               <div class="form-group">
                 <button class="btn btn-secondary">
                 <label for="exampleInputFile"><h5>Change Profile Picture</h5></label>
