@@ -178,7 +178,7 @@ def quiz(request):
     if 'givequiz' in request.POST:
         cid = request.POST.get('givequiz')
         content = Content.objects.get(pk=cid)
-        user=request.user()
+        user=request.user
         unique_id=Student.objects.get(unique_id=ExtraInfo.objects.get(user=user))
         quiz = Question.objects.filter(Q(content_id=content, level=unique_id.level))
         questions = random.sample(list(quiz), 10)
@@ -229,7 +229,7 @@ def study(request):
     cid = request.POST.get('content')
     content = Content.objects.get(pk=cid)
     file = File.objects.filter(Q(content_id=content))
-    user=request.user()
+    user=request.user
     unique_id=Student.objects.get(unique_id=ExtraInfo.objects.get(user=user))
     quiz = Question.objects.filter(Q(content_id=content, level=unique_id.level))
     context = {'content': content, 'file': file}
