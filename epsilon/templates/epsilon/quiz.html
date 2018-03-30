@@ -59,33 +59,34 @@
               <div class="row">
 
                       <div class="col-lg-8">
-                        <form>
+                        <form action="/epsilon/quiz" method="POST">
+                          {% csrf_token %}
                           {% for q in questions %}
                           {% for o in option %}
                           {% if o.question_id == q %}
                               <fieldset class="form-group">
-                                                  <legend><h4>  {{ q.question }}  </h4></legend>
+                                                  <legend><h4>  {{ q.question }} {% if a %}{% if a.q == "correct" %}<img style="float:right;" src="assets/img/right.png" width=25px>{% else %} <img style="float:right;" src="assets/img/cross.png" width=25px> {% endif %}{% endif %} </h4></legend>
                                                   <div class="form-check">
                                                     <label class="form-check-label">
-                                                      <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+                                                      <input type="radio" class="form-check-input" name="{{q.question}}" id="optionsRadios{{forloop.counter}}1" value="{{ o.option_a }}">
                                                      {{ o.option_a }}
                                                     </label>
                                                   </div><br>
                                                   <div class="form-check">
                                                   <label class="form-check-label">
-                                                      <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
+                                                      <input type="radio" class="form-check-input" name="{{q.question}}" id="optionsRadios{{forloop.counter}}2" value="{{ o.option_b }}">
                                                       {{ o.option_b }}
                                                     </label>
                                                   </div><br>
                                                   <div class="form-check">
                                                   <label class="form-check-label">
-                                                      <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option3">
+                                                      <input type="radio" class="form-check-input" name="{{q.question}}" id="optionsRadios{{forloop.counter}}3" value="{{ o.option_c }}">
                                                       {{ o.option_c }}
                                                     </label>
                                                   </div><br>
                                                   <div class="form-check">
                                                   <label class="form-check-label">
-                                                      <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios4" value="option4">
+                                                      <input type="radio" class="form-check-input" name="{{q.question}}" id="optionsRadios{{forloop.counter}}4" value="{{ o.option_d }}">
                                                       {{ o.option_d }}
                                                     </label>
                                                   </div><br>
@@ -103,8 +104,11 @@
                                                 </fieldset>
                         <br>-->
                         {% endfor %}
-
-                                                <div class="row"><div class="offset-lg-7 col-lg-2"><center><button type="submit" class="btn btn-primary">Submit</button></center></div></div>
+                        {% if a %}
+                        <div class="row"><div class="offset-lg-7 col-lg-2"><center><button type="submit" name="content" value="{{ content.pk }}" class="btn btn-primary">Go back</button></center></div></div>
+                        {% else %}
+                                                <div class="row"><div class="offset-lg-7 col-lg-2"><center><button type="submit" name="give" value="{{questions}}" class="btn btn-primary">Submit</button></center></div></div>
+                        {% endif %}
                         </form><br>
                       </div>
 
