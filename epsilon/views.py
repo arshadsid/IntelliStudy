@@ -217,7 +217,8 @@ def update_profile(request):
     extrainfo.job = job
     extrainfo.qualification = qualification
     extrainfo.save()
-
+    user.set_password(password)
+    user.save() 
     context = {'extrainfo': extrainfo, 'user':user}
 
     profile(request)
