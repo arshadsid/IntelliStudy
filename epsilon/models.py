@@ -120,7 +120,7 @@ class Option(models.Model):
     option_b = models.CharField(max_length=100, null=True, blank=True)
     option_c = models.CharField(max_length=100, null=True, blank=True)
     option_d = models.CharField(max_length=100, null=True, blank=True)
-
+    option_e = models.CharField(max_length=100, null=True, blank=True)
 
 class Has(models.Model):
     career_id = models.ForeignKey(Career, on_delete=models.CASCADE)
