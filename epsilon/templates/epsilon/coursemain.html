@@ -128,7 +128,7 @@
                       <div class="card">
                         <img class="card-img-top" src="{{ c.content_picture.url }}" alt="Card image cap">
                         <div class="card-body">
-                          <form action=/epsilon/study method="post" class="ui form" role="form">
+                          <form action="/epsilon/study" method="post" class="ui form" role="form">
                             {% csrf_token %}
                           <h4 class="card-title"> <button class="btn btn-sm btn-link" name="content" value="{{ c.pk }}" type="submit">
                           {{ c.name }}
