@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="assets/img/favicons/logo.png">
+
+    <title>Learning path Name</title>
+
+    <!-- Bootstrap core CSS -->
+    <script src="assets/js/jquery-3.2.1.slim.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/jquery-3.2.1.slim.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
+
+  </head>
+
+<style>
+
+  .timeline {
+    list-style: none;
+    padding: 20px 0 20px;
+    position: relative;
+}
+
+    .timeline:before {
+        top: 0;
+        bottom: 0;
+        position: absolute;
+        content: " ";
+        width: 3px;
+        background-color: #eeeeee;
+        left: 50%;
+        margin-left: -1.5px;
+    }
+
+    .timeline > li {
+        margin-bottom: 20px;
+        position: relative;
+    }
+
+        .timeline > li:before,
+        .timeline > li:after {
+            content: " ";
+            display: table;
+        }
+
+        .timeline > li:after {
+            clear: both;
+        }
+
+        .timeline > li:before,
+        .timeline > li:after {
+            content: " ";
+            display: table;
+        }
+
+        .timeline > li:after {
+            clear: both;
+        }
+
+        .timeline > li > .timeline-panel {
+            width: 46%;
+            float: left;
+            border: 1px solid #d4d4d4;
+            border-radius: 2px;
+            padding: 20px;
+            position: relative;
+            -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+        }
+
+            .timeline > li > .timeline-panel:before {
+                position: absolute;
+                top: 26px;
+                right: -15px;
+                display: inline-block;
+                border-top: 15px solid transparent;
+                border-left: 15px solid #ccc;
+                border-right: 0 solid #ccc;
+                border-bottom: 15px solid transparent;
+                content: " ";
+            }
+
+            .timeline > li > .timeline-panel:after {
+                position: absolute;
+                top: 27px;
+                right: -14px;
+                display: inline-block;
+                border-top: 14px solid transparent;
+                border-left: 14px solid #fff;
+                border-right: 0 solid #fff;
+                border-bottom: 14px solid transparent;
+                content: " ";
+            }
+
+        .timeline > li > .timeline-badge {
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            font-size: 1.4em;
+            text-align: center;
+            position: absolute;
+            top: 16px;
+            left: 50%;
+            margin-left: -25px;
+            background-color: #999999;
+            z-index: 100;
+            border-top-right-radius: 50%;
+            border-top-left-radius: 50%;
+            border-bottom-right-radius: 50%;
+            border-bottom-left-radius: 50%;
+        }
+
+        .timeline > li.timeline-inverted > .timeline-panel {
+            float: right;
+        }
+
+            .timeline > li.timeline-inverted > .timeline-panel:before {
+                border-left-width: 0;
+                border-right-width: 15px;
+                left: -15px;
+                right: auto;
+            }
+
+            .timeline > li.timeline-inverted > .timeline-panel:after {
+                border-left-width: 0;
+                border-right-width: 14px;
+                left: -14px;
+                right: auto;
+            }
+
+.timeline-badge.primary {
+    background-color: #2e6da4 !important;
+}
+
+.timeline-badge.success {
+    background-color: #3f903f !important;
+}
+
+.timeline-badge.warning {
+    background-color: #f0ad4e !important;
+}
+
+.timeline-badge.danger {
+    background-color: #d9534f !important;
+}
+
+.timeline-badge.info {
+    background-color: #5bc0de !important;
+}
+
+.timeline-title {
+    margin-top: 0;
+    color: inherit;
+}
+
+.timeline-body > p,
+.timeline-body > ul {
+    margin-bottom: 0;
+}
+
+    .timeline-body > p + p {
+        margin-top: 5px;
+    }
+
+@media (max-width: 767px) {
+    ul.timeline:before {
+        left: 40px;
+    }
+
+    ul.timeline > li > .timeline-panel {
+        width: calc(100% - 90px);
+        width: -moz-calc(100% - 90px);
+        width: -webkit-calc(100% - 90px);
+    }
+
+    ul.timeline > li > .timeline-badge {
+        left: 15px;
+        margin-left: 0;
+        top: 16px;
+    }
+
+    ul.timeline > li > .timeline-panel {
+        float: right;
+    }
+
+        ul.timeline > li > .timeline-panel:before {
+            border-left-width: 0;
+            border-right-width: 15px;
+            left: -15px;
+            right: auto;
+        }
+
+        ul.timeline > li > .timeline-panel:after {
+            border-left-width: 0;
+            border-right-width: 14px;
+            left: -14px;
+            right: auto;
+        }
+}
+
+</style>
+
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+    <a class="navbar-brand" href="index.html"><img src="assets/img/index/mainname.png" height=45px /></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor03">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="mycourses.html">My Courses <span class="sr-only" style="color:#3d3d3d">(current)</span></a>
+            </li>
+        </ul>
+        <ul class="nav justify-content-end">
+            <li class="nav-item">
+                <a class="nav-link" href="profile.html">Profile</a>
+            </li>
+        </ul>
+    </div>
+    </div>
+</nav>
+
+      <div class="jumbotron" style="color: #2c2828;background: #d0e8f0;">
+        <div class="row">
+        <div class="col-lg-7 offset-lg-1">
+        <h1 class="display-3" style="color: #2c2828;">Career Path Name</h1>
+        <p class="lead">Career Path Description.</p>
+        <hr class="my-4">
+
+        <div class="row"><p><br></p></div>
+          <p><h5>Learning Path Progress</h5></p>
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+        </div>
+
+        </div>
+
+        <div class="col-lg-3">
+             <div class="list-group">
+              <a href="coursestudy.html" class="list-group-item list-group-item-action flex-column align-items-start active">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">Go to the Study Workspace.</h5>
+                </div>
+                <p class="mb-1">Begin with this career path / Continue Learning</p>
+              </a>
+              <a href="#feedback" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">Give Feedback</h5>
+                </div>
+                <p class="mb-1">How well do you think this Career Path is Crafted?</p>
+              </a>
+              <a href="#subcourses" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">Learn More</h5>
+                </div>
+                <p class="mb-1">View the Career Path Journey.</p>
+              </a>
+              </div>
+        </div>
+      </div>
+
+      </div>
+
+      <div class="row"><div class="col-lg-10 offset-lg-1">
+
+      <div class="jumbotron" id="subcourses" style="background:white">
+        <div class="row">
+
+          <div class="col-lg-8 offset-lg-2">
+
+                 <div class="container">
+                                            <div class="page-header">
+                                                <center><h1 id="timeline">Career Journey</h1></center>
+                                            </div>
+
+                                            <ul class="timeline">
+
+                                                <li>
+                                                  <div class="timeline-badge info"><i class="glyphicon glyphicon-check">1</i></div>
+                                                  <div class="timeline-panel">
+                                                    <div class="timeline-heading">
+                                                      <h4 class="timeline-title">Course Name</h4>
+                                                      <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i><span class="badge badge-info">Beginner</span></small></p>
+                                                    </div>
+                                                    <div class="timeline-body">
+                                                      <p>Course Description</p>
+                                                      <hr>
+                                                      <a href="coursemain.html"><button type="button" class="btn btn-primary btn-sm">Goto Course</button></a>
+                                                    </div>
+                                                  </div>
+                                                </li>
+
+                                                <li class="timeline-inverted">
+                                                  <div class="timeline-badge warning"><i class="glyphicon glyphicon-credit-card">2</i></div>
+                                                  <div class="timeline-panel">
+                                                    <div class="timeline-heading">
+                                                      <h4 class="timeline-title">Course Name</h4>
+                                                      <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i><span class="badge badge-warning">Intermediate</span></small></p>
+                                                    </div>
+                                                    <div class="timeline-body">
+                                                      <p>Course Description</p>
+                                                      <hr>
+                                                      <a href="coursemain.html"><button type="button" class="btn btn-primary btn-sm">Goto Course</button></a>
+                                                    </div>
+                                                  </div>
+                                                </li>
+
+                                                <li>
+                                                  <div class="timeline-badge warning"><i class="glyphicon glyphicon-credit-card">3</i></div>
+                                                  <div class="timeline-panel">
+                                                    <div class="timeline-heading">
+                                                      <h4 class="timeline-title">Course Name</h4>
+                                                      <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i><span class="badge badge-warning">Intermediate</span></small></p>
+                                                    </div>
+                                                    <div class="timeline-body">
+                                                      <p>Course Description</p>
+                                                      <hr>
+                                                      <a href="coursemain.html"><button type="button" class="btn btn-primary btn-sm">Goto Course</button></a>
+                                                    </div>
+                                                    </div>
+                                                </li>
+
+                                                <li class="timeline-inverted">
+                                                  <div class="timeline-badge danger"><i class="glyphicon glyphicon-credit-card">4</i></div>
+                                                  <div class="timeline-panel">
+                                                    <div class="timeline-heading">
+                                                      <h4 class="timeline-title">Course Name</h4>
+                                                      <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i><span class="badge badge-danger">Advanced</span></small></p>
+                                                    </div>
+                                                    <div class="timeline-body">
+                                                      <p>Course Description</p>
+                                                      <hr>
+                                                      <a href="coursemain.html"><button type="button" class="btn btn-primary btn-sm">Goto Course</button></a>
+                                                    </div>
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                  <div class="timeline-badge danger"><i class="glyphicon glyphicon-floppy-disk">5</i></div>
+                                                  <div class="timeline-panel">
+                                                    <div class="timeline-heading">
+                                                      <h4 class="timeline-title">Course Name</h4>
+                                                      <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i><span class="badge badge-danger">Advanced</span></small></p>
+                                                    </div>
+                                                    <div class="timeline-body">
+                                                      <p>Course Description</p>
+                                                      <hr>
+                                                      <a href="coursemain.html"><button type="button" class="btn btn-primary btn-sm">Goto Course</button></a>
+                                                    </div>
+                                                    </div>
+                                                </li>
+
+                                                <li class="timeline-inverted">
+                                                  <div class="timeline-badge danger"><i class="glyphicon glyphicon-thumbs-up">6</i></div>
+                                                  <div class="timeline-panel">
+                                                    <div class="timeline-heading">
+                                                      <h4 class="timeline-title">Course Name</h4>
+                                                      <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i><span class="badge badge-danger">Advanced</span></small></p>
+                                                    </div>
+                                                    <div class="timeline-body">
+                                                      <p>Course Description</p>
+                                                      <hr>
+                                                      <a href="coursemain.html"><button type="button" class="btn btn-primary btn-sm">Goto Course</button></a>
+                                                     </div>
+                                                    </div>
+                                                </li>
+
+                                            </ul>
+                        </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    <div class="jumbotron" id="feedback" style="background:white">
+      <div class="row"><div class="col-lg-8 offset-lg-2">
+       <form>
+          <fieldset>
+            <legend><p>What do you think about this Career Path?</p></legend>
+            <div class="form-group">
+              <label for="suggestionsfeedback">Suggestions?</label>
+              <textarea class="form-control" id="suggestionsfeedback" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </fieldset>
+        </form>
+
+      </div></div>
+    </div>
+
+  <div class="container">
+  <div class="row">
+  <div class="col-lg-12"><hr style=" border: 2px solid #3d3d3d;">
+  <ul class="list-unstyled">
+    <li class="float-lg-right"><a href="#top">Back to top</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="https://github.com/gautamyadavs/IntelliStudy">Source | GitHub</a></li>
+  </ul>
+  <center><p>Made with <img src="assets/img/index/heart.png" width=18px /> by <a href="about.html#members">Team Epsilon</a>.</p></center>
+  </div>
+  </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+  </body>
+</html>
