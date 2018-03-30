@@ -70,7 +70,7 @@ class Career(models.Model):
 
 class Student(models.Model):
     unique_id = models.OneToOneField(ExtraInfo, on_delete=models.CASCADE, primary_key=True)
-    career_id = models.OneToOneField(Career, on_delete=models.CASCADE)
+    career_id = models.OneToOneField(Career, on_delete=models.CASCADE, null=True, blank=True)
     level = models.CharField(max_length=20, choices=Constants.LEVEL, default='beginner')
 
     def __str__(self):

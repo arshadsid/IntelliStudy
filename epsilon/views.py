@@ -41,28 +41,54 @@ def auth(request):
         return redirect('/epsilon')
 
 def signup(request):
-    fname = request.POST.get("fname")
-    lname = request.POST.get("lname")
-    username = request.POST.get("username")
-    email = request.POST.get("email")
-    password = request.POST.get("password")
-    print(password)
-    user, created = User.objects.get_or_create(username = username)
-    if created:
-        user.set_password(password)
-        user.first_name = fname
-        user.last_name = lname
-        user.email = email
-        user.save()
-    gender = request.POST.get("gender")
-    job = request.POST.get("job")
-    qualification = request.POST.get("qualification")
-    dob = request.POST.get("dob")
-    print(job,qualification)
-    info = ExtraInfo(user=user , sex=gender, date_of_birth=dob, job=job, qualification=qualification)
-    info.save()
-    login(request, user)
-    return redirect('/epsilon/dashboard')
+    if 'student' in request.POST:
+        fname = request.POST.get("fname")
+        lname = request.POST.get("lname")
+        username = request.POST.get("username")
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        print(password)
+        user, created = User.objects.get_or_create(username = username)
+        if created:
+            user.set_password(password)
+            user.first_name = fname
+            user.last_name = lname
+            user.email = email
+            user.save()
+        gender = request.POST.get("gender")
+        job = request.POST.get("job")
+        qualification = request.POST.get("qualification")
+        dob = request.POST.get("dob")
+        info = ExtraInfo(user=user , sex=gender, date_of_birth=dob, user_type="student", job=job, qualification=qualification)
+        info.save()
+        stud = Student(unique_id=info, level="beginner")
+        stud.save()
+        login(request, user)
+        return redirect('/epsilon/dashboard')
+    else:
+        fname = request.POST.get("fname")
+        lname = request.POST.get("lname")
+        username = request.POST.get("username")
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        print(password)
+        user, created = User.objects.get_or_create(username = username)
+        if created:
+            user.set_password(password)
+            user.first_name = fname
+            user.last_name = lname
+            user.email = email
+            user.save()
+        gender = request.POST.get("gender")
+        job = request.POST.get("job")
+        qualification = request.POST.get("qualification")
+        dob = request.POST.get("dob")
+        info = ExtraInfo(user=user , sex=gender, date_of_birth=dob, user_type="mentor", job=job, qualification=qualification)
+        info.save()
+        mentor = Mentor(mentor_id=info)
+        mentor.save()
+        login(request, user)
+        return redirect('/epsilon/mdashboard')
 
     # return HttpResponse("successfully signed up")
 
@@ -83,7 +109,7 @@ def mentor(request):
 
 @login_required
 def dashboard(request):
-    
+
 
     courses = Course.objects.all()
     context = {'courses': courses}
@@ -191,12 +217,12 @@ def update_profile(request):
     extrainfo.job = job
     extrainfo.qualification = qualification
     extrainfo.save()
-    
+
     context = {'extrainfo': extrainfo, 'user':user}
 
     profile(request)
     return render(request, "epsilon/profile.html", context)
-    
+
 @login_required
 def study(request):
     cid = request.POST.get('content')
